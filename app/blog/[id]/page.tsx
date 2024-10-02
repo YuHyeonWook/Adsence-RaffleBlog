@@ -1,3 +1,7 @@
+"use client";
+
+import { useParams } from "next/navigation";
+
 const posts = [
   {
     id: "1",
@@ -13,15 +17,20 @@ const posts = [
   },
 ];
 
-export default function BlogPost(params: { id: string }) {
+export default function BlogPost() {
+  const params = useParams();
   const { id } = params;
-  console.log(id);
+
+  const post = posts.find((post) => post.id === id);
+
+  if (!post) {
+    return <div>Post not found</div>;
+  }
 
   return (
     <div>
-      <h1>Blog Post</h1>
-      <p>Post content goes here</p>
-      <span>{id}</span>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
     </div>
   );
 }
