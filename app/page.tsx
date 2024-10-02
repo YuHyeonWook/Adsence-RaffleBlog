@@ -1,20 +1,45 @@
 import Link from "next/link";
-import posts from "../data/posts"; // 상대 경로로 posts.js 가져오기
+import posts from "../data/posts";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl">쇼핑몰 블로그</h1>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <Link href={`/blog/${post.id}`}>{post.title}</Link>
-            </li>
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-8">전체 글</h1>
+      <div className="space-y-6">
+        {posts.map((post) => (
+          <article key={post.id} className="border-b border-gray-200 pb-6">
+            <Link href={`/blog/${post.id}`} className="block group">
+              <h2 className="text-xl font-semibold mb-2 group-hover:text-blue-600">
+                {post.title}
+              </h2>
+              <p className="text-gray-600 mb-4 line-clamp-3">{post.content}</p>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="mr-4">목차1</span>
+                <span className="mr-4">문제에 대한 정보 수집3</span>
+                <span>원인 추론4</span>
+              </div>
+            </Link>
+          </article>
+        ))}
+      </div>
+      <div className="mt-8 flex justify-between items-center">
+        <button className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">
+          이전
+        </button>
+        <div className="space-x-2">
+          {[1, 2, 3, 4, 5].map((page) => (
+            <button
+              key={page}
+              className="w-8 h-8 border border-gray-300 rounded hover:bg-gray-100 focus:bg-blue-500 focus:text-white"
+            >
+              {page}
+            </button>
           ))}
-        </ul>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">{/* footer 내용 */}</footer>
+        </div>
+        <button className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">
+          다음
+        </button>
+      </div>
     </div>
   );
 }
