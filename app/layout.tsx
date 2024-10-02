@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
+import { GoogleAdSense } from "@/components/GoogleAdSense";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,6 +33,7 @@ export default function RootLayout({
         <Header />
         {children}
       </body>
+      <GoogleAdSense />
     </html>
   );
 }
